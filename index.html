@@ -9,13 +9,13 @@
 </head>
 <body>
     <input tabindex="1" placeholder="1">
-    <input tabindex="2" placeholder="2">
-    <input tabindex="3" placeholder="3">
+    <input tabindex="2" placeholder="2" style="display: none">
+    <input tabindex="3" placeholder="3" style="display:none">
     <input tabindex="4" placeholder="4">
     <input tabindex="5" placeholder="5">
 </body>
 <script>
-   let inputs = document.querySelectorAll("input,select");
+  let inputs = document.querySelectorAll("input,select");
       for (let i = 0 ; i < inputs.length; i++) {
         inputs[i].addEventListener("keypress", function(e){
           console.log("keypress");
@@ -23,7 +23,19 @@
             console.log("enter");
             e.preventDefault();
             let nextInput = document.querySelectorAll('[tabindex="' + (this.tabIndex + 1) + '"]');
+            try {
+            	while(true) {
+              	 if (nextInput[0].style.display === "none") {
+                 	console.log("input hidden");
+             		nextInput = document.querySelectorAll('[tabindex="' + (this.tabIndex ++) + '"]');
+                 }
+              }
+            }catch(err) {
+  			    console.log(err);
+			}
+           
             if (nextInput.length === 0) {
+            	console.log("length 0");
               nextInput = document.querySelectorAll('[tabindex="1"]');
             }
             nextInput[0].focus();
