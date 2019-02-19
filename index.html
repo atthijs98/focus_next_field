@@ -8,18 +8,27 @@
     <title>Document</title>
 </head>
 <body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <input class="focused" placeholder="1">
-    <input class="focused" placeholder="2">
-    <input class="focused" placeholder="3">
-    <input class="focused" placeholder="4">
-    <input class="focused" placeholder="5">
+    <input tabindex="1" placeholder="1">
+    <input tabindex="2" placeholder="2">
+    <input tabindex="3" placeholder="3">
+    <input tabindex="4" placeholder="4">
+    <input tabindex="5" placeholder="5">
 </body>
 <script>
-    $('.focused').keypress(function(event) {
-        if(event.which == 13) {
-            $(this).next('.focused').focus();
-        }
-    });
+   let inputs = document.querySelectorAll("input,select");
+      for (let i = 0 ; i < inputs.length; i++) {
+        inputs[i].addEventListener("keypress", function(e){
+          console.log("keypress");
+          if (e.which == 13) { //13
+            console.log("enter");
+            e.preventDefault();
+            let nextInput = document.querySelectorAll('[tabindex="' + (this.tabIndex + 1) + '"]');
+            if (nextInput.length === 0) {
+              nextInput = document.querySelectorAll('[tabindex="1"]');
+            }
+            nextInput[0].focus();
+          }
+        })
+      }
 </script>
 </html>
