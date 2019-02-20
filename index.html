@@ -16,31 +16,33 @@
 </body>
 <script>
   let inputs = document.querySelectorAll("input,select");
-      for (let i = 0 ; i < inputs.length; i++) {
-        inputs[i].addEventListener("keypress", function(e){
-          console.log("keypress");
-          if (e.which == 13) { //13
-            console.log("enter");
-            e.preventDefault();
-            let nextInput = document.querySelectorAll('[tabindex="' + (this.tabIndex + 1) + '"]');
-            try {
-            	while(true) {
-              	 if (nextInput[0].style.display === "none") {
-                 	console.log("input hidden");
-             		nextInput = document.querySelectorAll('[tabindex="' + (this.tabIndex ++) + '"]');
-                 }
-              }
-            }catch(err) {
-  			    console.log(err);
-			}
-           
-            if (nextInput.length === 0) {
-            	console.log("length 0");
-              nextInput = document.querySelectorAll('[tabindex="1"]');
-            }
-            nextInput[0].focus();
+for (let i = 0; i < inputs.length; i++) {
+  inputs[i].addEventListener("keypress", function(e) {
+    if (e.which == 13) { 
+      e.preventDefault();
+      let nextInput = document.querySelectorAll('[tabindex="' + (this.tabIndex + 1) + '"]');
+      if (nextInput.length === 0) {
+      	console.log("Last!");
+        nextInput = document.querySelectorAll('[tabindex="1"]');
+      } else if (nextInput[0].style.display !== "none" && nextInput.length !== 0) {
+      	console.log("Ja");
+      } else {
+      	let counter = [];
+      	console.log("Nee");
+        for (let j = 1; j < 50; j++) {
+        	nextInput = document.querySelectorAll('[tabindex="' + (this.tabIndex + j) + '"]');
+          if (nextInput[0].style.display !== "none" && nextInput.length !== 0) {
+          	console.log("Match!");
+          	counter.push(j);
+            break;
           }
-        })
-      }
+        }
+        nextInput = document.querySelectorAll('[tabindex="' + (this.tabIndex + counter[0]) + '"]');
+        counter = [];
+      } 
+      nextInput[0].focus();
+    }
+  })
+}
 </script>
 </html>
