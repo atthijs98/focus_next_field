@@ -21,17 +21,19 @@ inputs[i].addEventListener("keypress", function(e) {
 if (e.which == 13) { 
   e.preventDefault();
   let nextInput = document.querySelectorAll('[tabindex="' + (this.tabIndex + 1) + '"]');
+  let index = (nextInput > 1) ? nextInput.length-1 : 0;  
   if (nextInput.length === 0) {
     console.log("Last!");
-    nextInput = document.querySelectorAll('[tabindex="1"]');
-  } else if (nextInput[0].style.display !== "none" && nextInput.length !== 0) {
+    nextInput = document.querySelectorAll('[tabindex="1"]');  
+  } else if (nextInput[index].style.display !== "none" && nextInput.length !== 0) {
     console.log("Ja");
   } else {
     let counter = [];
     console.log("Nee");
     for (let j = 1; j < 50; j++) {
         nextInput = document.querySelectorAll('[tabindex="' + (this.tabIndex + j) + '"]');
-      if (nextInput[0].style.display !== "none" && nextInput.length !== 0) {
+        index = (nextInput > 1) ? nextInput.length-1 : 0; 
+      if (nextInput[index].style.display !== "none" && nextInput.length !== 0) {
         console.log("Match!");
         counter.push(j);
         break;
@@ -40,7 +42,7 @@ if (e.which == 13) {
     nextInput = document.querySelectorAll('[tabindex="' + (this.tabIndex + counter[0]) + '"]');
     counter = [];
   } 
-  nextInput[0].focus();
+  nextInput[index].focus();
 }
 })
 }
