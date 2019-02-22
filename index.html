@@ -15,7 +15,7 @@
     <input tabindex="5" placeholder="5">
 </body>
 <script>
-let inputs = document.querySelectorAll("input,select");
+let inputs = document.querySelectorAll("input[tabindex],select[tabindex]");
 for (let i = 0; i < inputs.length; i++) {
 inputs[i].addEventListener("keypress", function(e) {
 if (e.which == 13) { 
