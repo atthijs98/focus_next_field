@@ -30,7 +30,7 @@ if (e.which == 13) {
   } else {
     let counter = [];
     console.log("Nee");
-    for (let j = 1; j < 50; j++) {
+    for (let j = 1; j < inputs.length; j++) {
         nextInput = document.querySelectorAll('[tabindex="' + (this.tabIndex + j) + '"]');
         index = (nextInput > 1) ? nextInput.length-1 : 0; 
       if (nextInput[index].style.display !== "none" && nextInput.length !== 0) {
